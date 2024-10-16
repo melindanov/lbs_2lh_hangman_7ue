@@ -3,6 +3,7 @@ package hangmanView;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import java.util.List;
 
 public class hangmanView {
@@ -17,7 +18,7 @@ public class hangmanView {
     static JFrame f;
     private JButton guessButton;
     public JLabel pictureViewTest;
-    private hangmanGame game;
+    private static hangmanGame game;
     private JMenuBar menuBar;
     private JMenu settingsMenu;
     private JMenuItem setAttemptsMenuItem;
@@ -94,6 +95,27 @@ public class hangmanView {
         m1 = new JMenuItem("Wörter");
         m2 = new JMenuItem("Anzahl Versuche");
         m3 = new JMenuItem("History der Buchstaben");
+
+        m1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(frame, "Hier kannst du die Wörter verwalten.\n" + Arrays.toString(game.getWords()), "Wörter", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+
+        m2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(frame, "Versuche:\n" + game.getAttemptsLeft(), "Anzahl Versuche", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+
+        m3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(frame, "History der Buchstaben:\n", "History der Buchstaben", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
 
         x.add(m1);
         x.add(m2);
