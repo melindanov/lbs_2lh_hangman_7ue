@@ -100,9 +100,23 @@ public class hangmanView {
         m1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(frame, "Hier kannst du die Wörter verwalten.\n" + Arrays.toString(game.getWords()), "Wörter", JOptionPane.INFORMATION_MESSAGE);
+                String[] words = game.getWords();
+                StringBuilder formattedWords = new StringBuilder();
+                int wordsPerLine = 3; // Anzahl der Wörter pro Zeile
+
+                for (int i = 0; i < words.length; i++) {
+                    formattedWords.append(words[i]);
+                    if ((i + 1) % wordsPerLine == 0) {
+                        formattedWords.append("\n"); // Zeilenumbruch nach der angegebenen Anzahl von Wörtern
+                    } else {
+                        formattedWords.append(", ");
+                    }
+                }
+
+                JOptionPane.showMessageDialog(frame, "Hier kannst du die Wörter verwalten:\n" + formattedWords.toString(), "Wörter", JOptionPane.INFORMATION_MESSAGE);
             }
         });
+
 
         m2.addActionListener(new ActionListener() {
             @Override

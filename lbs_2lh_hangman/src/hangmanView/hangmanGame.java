@@ -58,7 +58,7 @@ public class hangmanGame {
     public String makeGuess(char guess) {
         // Überprüfen, ob der Buchstabe bereits geraten wurde
         if (guessedWord.toString().contains(String.valueOf(guess))) {
-            return "du hast diesen Buchstaben bereits geraten du eierschwammerl-.-";
+            return "du hast diesen Buchstaben bereits geraten du eierschwammerl -.-'";
         }
         guessedLetters.add(guess);
 
