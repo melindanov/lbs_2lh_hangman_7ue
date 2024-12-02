@@ -17,7 +17,7 @@ public class hangmanGame {
     private Set<Character> guessedLetters;
 
     public hangmanGame() {
-        words = loadWordsFromFile("src/words.txt");
+        words = loadWordsFromFile("lbs_2lh_hangman/src/words.txt");
         Random random = new Random();
         wordToGuess = words[random.nextInt(words.length)];
         guessedWord = new StringBuilder("_".repeat(wordToGuess.length()));

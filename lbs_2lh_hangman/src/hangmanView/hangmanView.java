@@ -49,7 +49,7 @@ public class hangmanView {
     }
 
     private void updateImage(int attemptsLeft) {
-        pictureViewTest.setIcon(new ImageIcon("src/img/" + (9- attemptsLeft) + ".png"));
+        pictureViewTest.setIcon(new ImageIcon("lbs_2lh_hangman/src/img/" + (9- attemptsLeft) + ".png"));
     }
 
     private void makeGuess() {
@@ -85,7 +85,8 @@ public class hangmanView {
         JFrame frame = new JFrame("hangmanView");
         frame.setContentPane(new hangmanView().hangmanPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ImageIcon icon = new ImageIcon("src/img/titlepic.png");
+        ImageIcon icon = new ImageIcon("lbs_2lh_hangman/src/img/titlepic.png");
+        frame.setIconImage(icon.getImage());
         frame.pack();
         frame.setVisible(true);
 
