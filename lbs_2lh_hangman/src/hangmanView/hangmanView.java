@@ -30,7 +30,6 @@ public class hangmanView {
         guessWordtxt.setText(game.getGuessedWord());
         letterFieldTxt.setText(game.getGuessedLetters());
         updateImage(game.getAttemptsLeft());
-//        setupNewGame();
 
         guessButton.addActionListener(new ActionListener() {
             @Override
@@ -47,18 +46,26 @@ public class hangmanView {
         newGameBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                game.setupNewGame(); // Ändere dies von hangmanGame.setupNewGame() zu game.setupNewGame()
-                guessWordtxt.setText(game.getGuessedWord());
-                letterFieldTxt.setText(game.getGuessedLetters());
-                updateImage(game.getAttemptsLeft());
-                guessButton.setEnabled(true); // Aktiviere den Button wieder, wenn ein neues Spiel gestartet wird
+                startNewGame();
             }
         });
+    }
 
+    private void startNewGame() {
+        // Setup a new game
+        game.setupNewGame();
+
+        // Update the displayed word and letters
+        guessWordtxt.setText(game.getGuessedWord());
+        letterFieldTxt.setText(game.getGuessedLetters());
+        updateImage(game.getAttemptsLeft());
+
+        // Enable the guess button again
+        guessButton.setEnabled(true);
     }
 
     private void updateImage(int attemptsLeft) {
-        pictureViewTest.setIcon(new ImageIcon("lbs_2lh_hangman/src/img/" + (9- attemptsLeft) + ".png"));
+        pictureViewTest.setIcon(new ImageIcon("lbs_2lh_hangman/src/img/" + (9 - attemptsLeft) + ".png"));
     }
 
     private void makeGuess() {
@@ -66,7 +73,7 @@ public class hangmanView {
 
         // Überprüfen, ob ein Buchstabe eingegeben wurde
         if (guessInput.isEmpty()) {
-            JOptionPane.showMessageDialog(hangmanPanel, "gib nen buchtsaben ein", "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(hangmanPanel, "Gib einen Buchstaben ein", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -126,7 +133,6 @@ public class hangmanView {
             }
         });
 
-
         m2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -150,6 +156,5 @@ public class hangmanView {
         frame.setJMenuBar(mb);
         frame.setSize(500, 700);
         frame.setVisible(true);
-
     }
 }

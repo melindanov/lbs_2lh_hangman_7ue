@@ -18,28 +18,15 @@ public class hangmanGame {
 
     public hangmanGame() {
         words = loadWordsFromFile("lbs_2lh_hangman/src/words.txt");
-        Random random = new Random();
-        guessedLetters = new HashSet<>();
-        setupNewGame();
-        wordToGuess = words[random.nextInt(words.length)];
-        guessedWord = new StringBuilder("_".repeat(wordToGuess.length()));
-        //guessedWord.append(" ");
-        attemptsLeft = 9;
-        wordGuessed = false;
+        setupNewGame(); // Initialisieren des Spiels beim Erstellen des Objekts
     }
 
     public void setupNewGame() {
-        attemptsLeft = 9;
-        guessedLetters.clear();
+        Random rand = new Random();
+        wordToGuess = words[rand.nextInt(words.length)];
         guessedWord = new StringBuilder("_".repeat(wordToGuess.length()));
-
-        if (words.length > 0) {
-            Random rand = new Random();
-            wordToGuess = words[rand.nextInt(words.length)];
-        } else {
-            //wordToGuess = "Katze";
-        }
-
+        attemptsLeft = 9;
+        guessedLetters = new HashSet<>();
         wordGuessed = false;
     }
 
@@ -64,22 +51,17 @@ public class hangmanGame {
         return wordGuessed;
     }
 
-    public String getWordToGuess() {
-        return wordToGuess;
-    }
-
     public String[] getWords() {
         return words;
     }
 
     public String makeGuess(char guess) {
         // Überprüfen, ob der Buchstabe bereits geraten wurde
-        if (guessedWord.toString().contains(String.valueOf(guess))) {
-            return "du hast diesen Buchstaben bereits geraten du eierschwammerl -.-'";
+        if (guessedLetters.contains(guess)) {
+            return "Du hast diesen Buchstaben bereits geraten!";
         }
+
         guessedLetters.add(guess);
-
-
 
         // Buchstabe richtig erraten
         if (wordToGuess.indexOf(guess) >= 0) {
@@ -90,17 +72,18 @@ public class hangmanGame {
             }
             if (guessedWord.toString().equals(wordToGuess)) {
                 wordGuessed = true;
-                return "wowser du hast '" + wordToGuess + "' erraten.";
+                return "Herzlichen Glückwunsch! Du hast das Wort '" + wordToGuess + "' erraten!";
             }
-            return "Des haut ja hin!";
+            return "Gut gemacht!";
         } else {
             attemptsLeft--;
             if (attemptsLeft <= 0) {
-                return "oof. das wort wäre '" + wordToGuess + "'.";
+                return "Leider verloren. Das Wort war '" + wordToGuess + "'.";
             }
-            return "Der Buchstabe ist nicht im Wort LOL. Versuche übrig: " + attemptsLeft;
+            return "Falsch. Versuche übrig: " + attemptsLeft;
         }
     }
+
     public String getGuessedLetters() {
         StringBuilder letters = new StringBuilder();
         for (char letter : guessedLetters) {
