@@ -3,7 +3,6 @@ package hangmanView;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
 import java.util.List;
 
 public class hangmanView {
@@ -18,6 +17,7 @@ public class hangmanView {
     static JFrame f;
     private JButton guessButton;
     public JLabel pictureViewTest;
+    private JButton newGameBtn;
     private static hangmanGame game;
     private JMenuBar menuBar;
     private JMenu settingsMenu;
@@ -25,12 +25,12 @@ public class hangmanView {
     private JCheckBoxMenuItem showHistoryMenuItem;
     private List<String> words;
 
-
     public hangmanView() {
         game = new hangmanGame();
         guessWordtxt.setText(game.getGuessedWord());
         letterFieldTxt.setText(game.getGuessedLetters());
         updateImage(game.getAttemptsLeft());
+//        setupNewGame();
 
         guessButton.addActionListener(new ActionListener() {
             @Override
@@ -44,7 +44,16 @@ public class hangmanView {
                 makeGuess();
             }
         });
-
+        newGameBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                game.setupNewGame(); // Ändere dies von hangmanGame.setupNewGame() zu game.setupNewGame()
+                guessWordtxt.setText(game.getGuessedWord());
+                letterFieldTxt.setText(game.getGuessedLetters());
+                updateImage(game.getAttemptsLeft());
+                guessButton.setEnabled(true); // Aktiviere den Button wieder, wenn ein neues Spiel gestartet wird
+            }
+        });
 
     }
 

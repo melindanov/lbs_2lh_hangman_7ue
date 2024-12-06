@@ -12,18 +12,35 @@ public class hangmanGame {
     private String[] words;
     private String wordToGuess;
     private StringBuilder guessedWord;
-    private int attemptsLeft;
+    public int attemptsLeft;
     private boolean wordGuessed;
     private Set<Character> guessedLetters;
 
     public hangmanGame() {
         words = loadWordsFromFile("lbs_2lh_hangman/src/words.txt");
         Random random = new Random();
+        guessedLetters = new HashSet<>();
+        setupNewGame();
         wordToGuess = words[random.nextInt(words.length)];
         guessedWord = new StringBuilder("_".repeat(wordToGuess.length()));
+        //guessedWord.append(" ");
         attemptsLeft = 9;
         wordGuessed = false;
-        guessedLetters = new HashSet<>();
+    }
+
+    public void setupNewGame() {
+        attemptsLeft = 9;
+        guessedLetters.clear();
+        guessedWord = new StringBuilder("_".repeat(wordToGuess.length()));
+
+        if (words.length > 0) {
+            Random rand = new Random();
+            wordToGuess = words[rand.nextInt(words.length)];
+        } else {
+            //wordToGuess = "Katze";
+        }
+
+        wordGuessed = false;
     }
 
     private String[] loadWordsFromFile(String filename) {
